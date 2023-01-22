@@ -2,9 +2,9 @@
     <!-- Logo -->
     <a href="{{ url('/admin') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>M</b>CRM</span>
+        <span class="logo-mini"><b>M</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Mini</b>CRM</span>
+        <span class="logo-lg"><b>Mail</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -93,19 +93,29 @@
                     </ul>
                 </li>
 
-
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        @if(\Auth::user()->image != null)
+                            <img src="{{ url('uploads/users/' . \Auth::user()->image) }}" width="160" height="160" class="user-image" alt="User Image">
+                        @else
+                            <img src="{{ url('theme/dist/img/image_placeholder.png') }}" class="user-image" alt="User Image">
+                        @endif
+                        <span class="hidden-xs">{{ \Auth::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
 
+                            @if(\Auth::user()->image != null)
+                                <img src="{{ url('uploads/users/' . \Auth::user()->image) }}" width="160" height="160" class="img-circle" alt="User Image">
+                            @else
+                                <img src="{{ url('theme/dist/img/image_placeholder.png') }}" class="img-circle" alt="User Image">
+                            @endif
+
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                {{ \Auth::user()->name . (\Auth::user()->position_title!=''?' - ' . \Auth::user()->position_title:'') }}
+                                @if(\Auth::user()->created_at != null) <small>Member since {{ \Auth::user()->created_at->diffForHumans() }}</small> @endif
                             </p>
                         </li>
                         <!-- Menu Footer-->
@@ -114,7 +124,11 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Sign out</a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </div>
                         </li>
                     </ul>
