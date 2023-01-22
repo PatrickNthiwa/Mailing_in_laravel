@@ -5,10 +5,14 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ url('theme') . '/dist/' }}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                @if(\Auth::user()->image != null)
+                    <img src="{{ url('uploads/users/' . \Auth::user()->image) }}" class="img-circle" alt="User Image">
+                @else
+                    <img src="{{ url('theme/dist/img/image_placeholder.png') }}" class="img-circle" alt="User Image">
+                @endif
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>{{ \Auth::user()->name }}</p>
             </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
