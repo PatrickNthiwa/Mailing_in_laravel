@@ -18,6 +18,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', function () {
         return view('pages.home.index');
     });
+
+    Route::get('/forbidden', function () {
+        return view('pages.forbidden.forbidden_area');
+    });
 });
 
 Route::get('/', function () {
