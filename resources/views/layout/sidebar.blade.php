@@ -18,15 +18,22 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
-                <a href="#">
+            <li class="{{ Request::segment(2) == ""?"active":"" }}">
+                <a href="{{ url('/admin') }}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="{{ Request::segment(2) == "users"?"active":"" }} treeview">
+                <a href="#">
+                    <i class="fa fa-users"></i> <span>Users Management</span>
                     <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Home</a></li>
+                    <li class="{{ Request::segment(2) == "users"?"active":"" }}">
+                        <a href="{{ url('/admin/users') }}"><i class="fa fa-user-o"></i> Users</a>
+                    </li>
                 </ul>
             </li>
         </ul>
