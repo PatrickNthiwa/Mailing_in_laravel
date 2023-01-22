@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('layout.app')
 
 @section('title', ' | Create %%modelName%%')
@@ -19,6 +20,18 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+=======
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            @include('admin.sidebar')
+
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">Create New %%modelName%%</div>
+>>>>>>> origin/master
                     <div class="card-body">
                         <a href="{{ url('/%%routeGroup%%%%viewName%%') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
@@ -32,7 +45,11 @@
                             </ul>
                         @endif
 
+<<<<<<< HEAD
                         <form method="POST" action="{{ url('/%%routeGroup%%%%viewName%%') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+=======
+                        <form method="POST" action="{{ url('/%%routeGroup%%%%viewName%%') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+>>>>>>> origin/master
                             {{ csrf_field() }}
 
                             @include ('%%viewTemplateDir%%.form', ['formMode' => 'create'])
@@ -43,5 +60,9 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
     </section>
+=======
+    </div>
+>>>>>>> origin/master
 @endsection
