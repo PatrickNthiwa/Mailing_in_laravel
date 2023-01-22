@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mailbox_receivers', function (Blueprint $table) {
-            $table->id();
+        Schema::create('mailbox_receiver', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('mailbox_id')->unsigned();
+            $table->integer('receiver_id')->unsigned();
             $table->timestamps();
+            $table->foreign('mailbox_id')->references('id')->on('mailbox')->onDelete('cascade');
+            $table->foreign('receiver_id')->references('id')->on('users');
         });
     }
 

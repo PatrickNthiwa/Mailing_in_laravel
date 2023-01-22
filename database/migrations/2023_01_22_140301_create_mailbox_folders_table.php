@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mailbox_folders', function (Blueprint $table) {
-            $table->id();
+        Schema::create('mailbox_folder', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string("title");
+            $table->string("icon");
             $table->timestamps();
         });
     }

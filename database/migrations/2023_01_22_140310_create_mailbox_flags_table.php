@@ -14,11 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('mailbox_flags', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->tinyInteger("is_unread")->default(0);
+            $table->tinyInteger("is_important")->default(0);
+            $table->integer('mailbox_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+            $table->foreign('mailbox_id')->references('id')->on('mailbox')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
-
     /**
      * Reverse the migrations.
      *

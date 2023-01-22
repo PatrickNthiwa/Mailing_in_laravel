@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mailbox_user_folders', function (Blueprint $table) {
-            $table->id();
+        Schema::create('mailbox_user_folder', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer("user_id")->unsigned();
+            $table->integer("mailbox_id")->unsigned();
+            $table->integer("folder_id")->unsigned();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('mailbox_id')->references('id')->on('mailbox')->onDelete('cascade');
+            $table->foreign('folder_id')->references('id')->on('mailbox_folder');
         });
     }
 

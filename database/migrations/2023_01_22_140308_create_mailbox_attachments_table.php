@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mailbox_attachments', function (Blueprint $table) {
-            $table->id();
+        Schema::create('mailbox_attachment', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('mailbox_id')->unsigned();
+            $table->string('attachment');
             $table->timestamps();
+
+            $table->foreign('mailbox_id')->references('id')->on('mailbox')->onDelete('cascade');
         });
     }
 
